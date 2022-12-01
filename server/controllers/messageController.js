@@ -28,7 +28,7 @@ module.exports.addMessage = async (req, res, next) => {
     const data = await Messages.create({
       message: { text: message },
       users: [from, to],
-      sender: from,
+      sender: from, 
     });
 
     if (data) return res.json({ msg: "Message added successfully." });

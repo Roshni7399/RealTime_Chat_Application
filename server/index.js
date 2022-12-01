@@ -10,8 +10,13 @@ require("dotenv").config();
 app.use(cors());
 app.use(express.json());
 
+const userdetail = {
+  user: "roshnimanmode",
+  pass: "roshnimanmode45",
+};
+
 mongoose
-  .connect(process.env.MONGO_URL, {
+  .connect(process.env.MONGO_URL, userdetail, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -39,10 +44,12 @@ global.onlineUsers = new Map();
 io.on("connection", (socket) => {
   global.chatSocket = socket;
   socket.on("add-user", (userId) => {
+    console.log("userId", socket.id);
     onlineUsers.set(userId, socket.id);
   });
 
   socket.on("send-msg", (data) => {
+    console.log(data);
     const sendUserSocket = onlineUsers.get(data.to);
     if (sendUserSocket) {
       socket.to(sendUserSocket).emit("msg-recieve", data.msg);

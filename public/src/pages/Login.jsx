@@ -9,7 +9,11 @@ import { loginRoute } from "../utils/APIRoutes";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [values, setValues] = useState({ username: "", password: "" });
+  const [values, setValues] = useState({ 
+    username: "", 
+    password: "" 
+  });
+
   const toastOptions = {
     position: "bottom-right",
     autoClose: 8000,
@@ -17,6 +21,7 @@ export default function Login() {
     draggable: true,
     theme: "dark",
   };
+  
   useEffect(() => {
     if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
       navigate("/");
@@ -67,7 +72,7 @@ export default function Login() {
         <form action="" onSubmit={(event) => handleSubmit(event)}>
           <div className="brand">
             <img src={Logo} alt="logo" />
-            <h1>snappy</h1>
+            <h1>Chit-Chat</h1>
           </div>
           <input
             type="text"
